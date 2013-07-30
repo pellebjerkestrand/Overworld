@@ -51,3 +51,59 @@ document.addEventListener('DOMContentLoaded', function(){
     app.initialize();
 });
 ```
+
+Why?
+----
+
+Imagine the code snippets below are in different files.
+I wanted to be able to do something like this:
+
+```javascript
+(function(window){
+    var app = window.app || Overworld.createApp();
+
+    app.onInitialize(function(){
+        // App init stuff
+    });
+
+    document.addEventListener('DOMContentLoaded', function(){
+        app.initialize();
+    });
+
+    window.app = app;
+})(window, document);
+```
+
+```javascript
+(function(window){
+    var app = window.app || Overworld.createApp();
+
+    var mod = Overworld.createModule();
+
+    mod.onInitialize(function(){
+        // Module init stuff
+    });
+
+    app.register(mod);
+
+    window.app = app;
+})(window);
+```
+
+```javascript
+(function(window){
+    var app = window.app || Overworld.createApp();
+
+    var mod = Overworld.createModule();
+
+    mod.onInitialize(function(){
+        // Module init stuff for another module
+    });
+
+    app.register(mod);
+
+    window.app = app;
+})(window);
+```
+
+That's why.
