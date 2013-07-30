@@ -38,7 +38,7 @@ module.onInitialize(function(){
 ```
 
 Apps are initialized manually.
-Modules registered with an app will initialize in the order they were added when the app.initialize() is called.
+Modules registered with an app will initialize in the order they were added when app.initialize() is called.
 
 ```javascript
 app.initialize();
